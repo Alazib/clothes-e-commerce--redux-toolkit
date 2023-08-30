@@ -95,12 +95,14 @@ export const createUserDocumentFromAuth = async (
         createdAt,
         ...additionalInformation,
       })
+      const newUserSnapshot = await getDoc(userDocRef)
+      return newUserSnapshot.data()
     } catch (error) {
       console.log("error creating the user", error.message)
     }
   }
 
-  return userDocRef
+  return userSnapshot.data()
 }
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {

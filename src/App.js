@@ -18,12 +18,17 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user)
+    const unsubscribe = onAuthStateChangedListener(async (userAuth) => {
+      const userData = await createUserDocumentFromAuth(userAuth)
+
+      if (userAuth && !userAuth.displayName) {
+        const { displayName } = userData
+        const userAuthWithName = { ...userAuth, displayName: displayName }
+        dispatch(setCurrentUser(userAuthWithName))
+        return
       }
-      console.log(setCurrentUser(user))
-      dispatch(setCurrentUser(user))
+
+      dispatch(setCurrentUser(userAuth))
     })
 
     return unsubscribe
