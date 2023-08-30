@@ -30,7 +30,7 @@ export const store = configureStore({
   reducer: rootReducer,
   // middleware: middleWares,
   // Redux ToolKit comes with 3 middlewares by default: 1) Redux Thunks, 2)¿? and 3)¿?.
-  // If we pass custom middlewares to RTK we will delete de 3 default middlewares and they will be replaces by the custom ones.
+  // If we pass custom middlewares to RTK we will delete the 3 default middlewares and they will be replaced by the custom ones.
 })
 
 // // export const persistor = persistStore(store)
