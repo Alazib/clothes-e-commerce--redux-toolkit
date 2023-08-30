@@ -28,9 +28,14 @@ const middleWares = [process.env.NODE_ENV === "development" && logger].filter(
 
 export const store = configureStore({
   reducer: rootReducer,
-  // middleware: middleWares,
-  // Redux ToolKit comes with 3 middlewares by default: 1) Redux Thunks, 2)¿? and 3)¿?.
-  // If we pass custom middlewares to RTK we will delete the 3 default middlewares and they will be replaced by the custom ones.
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(middleWares),
+  // Redux ToolKit comes with 3 middlewares by default: 1) Redux Thunks, 2) Serializable value checker, and 3)¿?.
+  // If we pass custom middlewares as an array to RTK we will delete the 3 default middlewares and they will be
+  // replaced by the custom ones. But we can pass a function in order to keep the default middlewares that we can to keep and
+  // add our custom ones.
 })
 
 // // export const persistor = persistStore(store)
