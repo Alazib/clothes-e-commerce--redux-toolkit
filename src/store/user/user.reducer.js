@@ -12,6 +12,7 @@ export const userSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     setCurrentUser(state, action) {
+      console.log("USER")
       state.currentUser = action.payload // This looks like a mutation, but it is not. Under the hood Redux generates a new object, because
       // RTK leverages a library called Immer than ensures the inmutability.Remember: Redux is based on the INMUTABILITY OF STATES.
       //It generates a new object each time an action is passed trought it.
